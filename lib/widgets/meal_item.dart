@@ -10,7 +10,7 @@ class MealItem extends StatelessWidget {
     required this.onSelectMeal,
   });
   final Meal meal;
-  final void Function(BuildContext context, Meal meal ) onSelectMeal;
+  final void Function(BuildContext context, Meal meal) onSelectMeal;
   String get complexityText {
     return meal.complexity.name[0].toUpperCase() +
         meal.complexity.name.substring(1);
@@ -32,18 +32,21 @@ class MealItem extends StatelessWidget {
       elevation: 2,
       child: InkWell(
         onTap: () {
-          onSelectMeal(context,meal);
+          onSelectMeal(context, meal);
         },
         child: Stack(
           children: [
-            FadeInImage(
-              placeholder: MemoryImage(
-                kTransparentImage,
+            Hero(
+              tag: meal.id,
+              child: FadeInImage(
+                placeholder: MemoryImage(
+                  kTransparentImage,
+                ),
+                image: NetworkImage(meal.imageUrl),
+                fit: BoxFit.cover,
+                height: 200,
+                width: double.infinity,
               ),
-              image: NetworkImage(meal.imageUrl),
-              fit: BoxFit.cover,
-              height: 200,
-              width: double.infinity,
             ),
             Positioned(
               bottom: 0,
